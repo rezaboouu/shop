@@ -17,9 +17,8 @@ Route::prefix("v1")->group(function (){
         Route::prefix('product')->group(function () {
             Route::get('/', [ProductController::class, 'select']);
             Route::post('/create', [ProductController::class, 'insert']);
-            Route::get('/edit/{permission}', [ProductController::class, 'edit']);
-            Route::put('/update/{permission}', [ProductController::class, 'update']);
-            Route::delete('/delete/{permission}', [ProductController::class, 'destroy']);
+            Route::put('/update/{product}', [ProductController::class, 'update']);
+            Route::delete('/delete', [ProductController::class, 'destroy']);
         });
     });
 });

@@ -15,7 +15,6 @@ class ProductController extends Controller
         $this->productRepositoryApi = $productRepositoryApi;
     }
 
-
     public function select(ProductRepositoryApi $productRepositoryApi)
     {
         return $productRepositoryApi->select();
@@ -23,6 +22,11 @@ class ProductController extends Controller
     public function insert(ProductRepositoryApi $productRepositoryApi, StoreProductRequest $request)
     {
         return $productRepositoryApi->insert($request);
+    }
+    public function destroy(ProductRepositoryApi $productRepositoryApi,Request $request)
+    {
+
+        return $productRepositoryApi->destroy($request);
     }
 
 }

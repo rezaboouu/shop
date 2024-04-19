@@ -4,14 +4,8 @@ namespace App\Repository\api;
 
 
 use App\Http\Requests\StoreProductRequest;
-use App\Models\Admin\Task\Task;
-use App\Models\Admin\Task\TaskCompletions;
-use App\Models\Admin\User;
 use App\Models\product;
 use App\Repository\api\Contract\ProductRepositoryInterfaceApi;
-use App\Repository\api\Contract\ProfileRepositoryInterfaceApi;
-use App\Repository\api\Contract\TaskRepositoryInterfaceApi;
-use App\Repository\api\Contract\UserRepositoryInterfaceApi;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -77,5 +71,34 @@ class ProductRepositoryApi implements ProductRepositoryInterfaceApi
             'data' => null,
         ], 400);
 
+    }
+
+    public function destroy(Request $request): JsonResponse
+    {
+        $id = $request->id;
+
+        if (!$id){
+            return response()->json([
+                'code' => 2,
+                'message' => 'ایدی پیدا نشد ',
+                'data' => null,
+            ], 400);
+        }
+
+        $product = product::find($id);
+
+        if (!$product){
+            return response()->json([
+                'code' => 2,
+                'message' => 'ایدی پیدا نشد ',
+                'data' => null,
+            ], 400);
+        }
+        $product->delete();
+        return response()->json([
+            'code' => 1,
+            'message' => 'محصول حذف شد',
+            'data' => true,
+        ], 200);
     }
 }
