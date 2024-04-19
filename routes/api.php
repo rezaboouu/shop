@@ -10,20 +10,17 @@ Route::get('/user', function (Request $request) {
 
 
 
-
-
-//admin page api
-
-Route::prefix("admin")->group(function (){
-
-    //product
-    Route::prefix('product')->group(function () {
-        Route::get('/', [ProductController::class, 'select']);
-        Route::get('/create', [ProductController::class, 'create']);
-        Route::post('/store', [ProductController::class, 'store']);
-        Route::get('/edit/{permission}', [ProductController::class, 'edit']);
-        Route::put('/update/{permission}', [ProductController::class, 'update']);
-        Route::delete('/delete/{permission}', [ProductController::class, 'destroy']);
+Route::prefix("v1")->group(function (){
+    //admin page api
+    Route::prefix("admin")->group(function (){
+        //product
+        Route::prefix('product')->group(function () {
+            Route::get('/', [ProductController::class, 'select']);
+            Route::post('/create', [ProductController::class, 'insert']);
+            Route::get('/edit/{permission}', [ProductController::class, 'edit']);
+            Route::put('/update/{permission}', [ProductController::class, 'update']);
+            Route::delete('/delete/{permission}', [ProductController::class, 'destroy']);
+        });
     });
 });
 
