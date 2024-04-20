@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\product;
 use App\Repository\api\ProductRepositoryApi;
 use Illuminate\Http\Request;
@@ -25,8 +26,11 @@ class ProductController extends Controller
     }
     public function destroy(ProductRepositoryApi $productRepositoryApi,Request $request)
     {
-
         return $productRepositoryApi->destroy($request);
+    }
+    public function update(ProductRepositoryApi $productRepositoryApi,UpdateProductRequest $request)
+    {
+        return $productRepositoryApi->update($request);
     }
 
 }

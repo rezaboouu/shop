@@ -4,6 +4,7 @@ namespace App\Repository\api;
 
 
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\product;
 use App\Repository\api\Contract\ProductRepositoryInterfaceApi;
 use http\Env\Response;
@@ -17,7 +18,6 @@ use Illuminate\Support\Facades\Hash;
 
 class ProductRepositoryApi implements ProductRepositoryInterfaceApi
 {
-
 
     //select product and pagination in address  domain/v1/api/product
     public function select(): JsonResponse
@@ -39,8 +39,7 @@ class ProductRepositoryApi implements ProductRepositoryInterfaceApi
         ], 200);
     }
 
-
-    //insert product and pagination in address  domain/v1/api/product
+    //insert product and pagination in address  domain/v1/api/product/create
     public function insert(StoreProductRequest $request): JsonResponse
     {
 
@@ -73,6 +72,7 @@ class ProductRepositoryApi implements ProductRepositoryInterfaceApi
 
     }
 
+    //delete product and pagination in address  domain/v1/api/product/delete
     public function destroy(Request $request): JsonResponse
     {
         $id = $request->id;
@@ -100,5 +100,32 @@ class ProductRepositoryApi implements ProductRepositoryInterfaceApi
             'message' => 'محصول حذف شد',
             'data' => true,
         ], 200);
+    }
+
+
+    //update product and pagination in address  domain/v1/api/product/delete
+    public function update(UpdateProductRequest $request): JsonResponse
+    {
+        $data = $request->all();
+
+        $id = $request->id;
+
+        if (!$id){
+            return response()->json([
+                'code' => 2,
+                'message' => 'شناسه محصول اشتباه است ',
+                'data' => null,
+            ], 400);
+        }
+        $product = product::find($id);
+
+
+        $product->update($data);
+
+        return response()->json([
+            'code' => 1,
+            'message' => 'عملیات با موفقیت انجام شد',
+            'data' => $product,
+        ], 400);
     }
 }
