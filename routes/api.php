@@ -8,5 +8,19 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
-Route::get('/product', [ProductController::class,'index']);
+
+
+Route::prefix("v1")->group(function (){
+    //admin page api
+    Route::prefix("admin")->group(function (){
+        //product
+        Route::prefix('product')->group(function () {
+            Route::get('/', [ProductController::class, 'select']);
+            Route::post('/create', [ProductController::class, 'insert']);
+            Route::put('/update', [ProductController::class, 'update']);
+            Route::delete('/delete', [ProductController::class, 'destroy']);
+        });
+    });
+});
+
 

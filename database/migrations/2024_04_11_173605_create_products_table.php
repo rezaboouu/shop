@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('image');
             $table->string('desc');
-            $table->string('sku');
+            $table->string('sku')->unique();
             $table->foreignId('category_id')->constrained('product_categories');
             $table->foreignId('inventory_id')->constrained('product_inventories');
             $table->bigInteger('price');
