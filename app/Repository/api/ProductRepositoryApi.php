@@ -5,7 +5,7 @@ namespace App\Repository\api;
 
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
-use App\Models\product;
+use App\Models\Product;
 use App\Repository\api\Contract\ProductRepositoryInterfaceApi;
 use http\Env\Response;
 use Illuminate\Http\Request;
@@ -22,7 +22,7 @@ class ProductRepositoryApi implements ProductRepositoryInterfaceApi
     //select product and pagination in address  domain/v1/api/product
     public function select(): JsonResponse
     {
-        $product = product::select("name","desc","sku","category_id","inventory_id","price")
+        $product = Product::select("name","desc","sku","category_id","inventory_id","price")
             ->paginate(20);
 
         if ($product->isEmpty()){
