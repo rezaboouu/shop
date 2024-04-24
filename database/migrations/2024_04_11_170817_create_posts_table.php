@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('author_id')->constrained('admins');
-            $table->foreignId('category_id')->constrained('admins');
+            $table->foreignId('category_id')->constrained('post_categories');
             $table->string('slug')->unique();
             $table->string('title');
             $table->timestamp('published');

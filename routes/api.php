@@ -41,6 +41,12 @@ Route::prefix("v1")->group(function (){
             Route::delete('/delete', [UserController::class, 'destroy']);
         });
     });
+
+    Route::prefix('post')->group(function () {
+        Route::get('/', [PostController::class, 'select']);
+    });
+
+
 });
 
 
