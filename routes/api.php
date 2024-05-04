@@ -12,9 +12,9 @@ Route::get('/user', function (Request $request) {
 
 
 
-Route::prefix("v1")->group(function (){
+Route::prefix("v1")->group(function () {
     //admin page api
-    Route::prefix("admin")->group(function (){
+    Route::prefix("admin")->group(function () {
         //products
         Route::prefix('product')->group(function () {
             Route::get('/', [ProductController::class, 'select']);
@@ -46,7 +46,9 @@ Route::prefix("v1")->group(function (){
         Route::get('/', [PostController::class, 'select']);
     });
 
-
+    Route::prefix('product')->group(function () {
+        Route::get('/', [ProductController::class, 'select']);
+    });
 });
 
 
