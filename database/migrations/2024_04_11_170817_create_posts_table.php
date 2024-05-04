@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('title');
             $table->timestamp('published');
-            $table->timestamp('summary')->default(now());
+            $table->string('summary')->default(now());
             $table->string('content');
             $table->timestamps();
         });
